@@ -1,7 +1,11 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using VexIT.Core.AutoMapper;
 using VexIT.Core.Implementation.Business;
 using VexIT.Core.Interfaces;
+using VexIT.DataAccess.Db;
+using VexIT.DataAccess.Model;
+using VexIT.DataAccess.Repositories;
 
 namespace VexIT.Api.StartUp
 {
@@ -16,6 +20,7 @@ namespace VexIT.Api.StartUp
         {
             services.AddSingleton(sp => AutoMapperConfiguration.Mapper);
             services.AddTransient<IEventsService, EventsService>();
+            services.AddTransient<IRepository<Event>, EventRepository>();
         }
     }
 }

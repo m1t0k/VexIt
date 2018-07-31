@@ -12,9 +12,8 @@ namespace VexIT.Core.Implementation.Business
     public class EventsService : BaseDataService<Event, EventDto,
         EventQueryDto>, IEventsService
     {
-        public EventsService(IMapper mapper, VexItContext context) : base(mapper, context)
+        public EventsService(IMapper mapper, IRepository<Event> repository) : base(mapper, repository)
         {
-            Repository = new EventRepository(context);
         }
 
 

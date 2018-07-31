@@ -23,10 +23,11 @@ namespace VexIT.Core.Implementation.Base
         protected IMapper Mapper;
         protected IRepository<T> Repository;
 
-        protected BaseDataService(IMapper mapper, VexItContext context)
+        protected BaseDataService(IMapper mapper, IRepository<T> repository)
         {
             Mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-            Context = context ?? throw new ArgumentNullException(nameof(context));
+            Repository = repository ?? throw new ArgumentNullException(nameof(repository));
+            Context = Repository.Context;
         }
 
         public virtual async Task<TU> CreateItemAsync(TU dtoItem)

@@ -31,29 +31,27 @@ namespace VexIT.Tests
             Context = new VexItContext(options);
             Context.Database.Migrate();
 
-            // sqllite supports only serializable isolation level
-            Context.DefaultBatchIsolationLevel = IsolationLevel.Serializable;
-
-            //RepositoryHelper = new RepositoryHelper(Context, Mapper, CurrentIdentityProvider);
-
             var serviceCollection = new ServiceCollection();
-
             serviceCollection.AddSingleton(this.Context);
+
+
             serviceCollection.AddSingleton(this.Mapper);
+            serviceCollection.AddDbContext<VexItContext>(ops => { ops.UseSqlite(Connection); });
 
             serviceCollection.AddTransient<IRepository<Event>, EventRepository>();
             serviceCollection.AddTransient<IEventsService, EventsService>();
-
             ServiceProvider = serviceCollection.BuildServiceProvider();
+
+            // sqllite supports only serializable isolation level
+            Context.DefaultBatchIsolationLevel = IsolationLevel.Serializable;
             DatabaseFixture.Migrate(ServiceProvider);
+
+
         }
 
         protected SqliteConnection Connection { get; private set; }
 
         protected string Name => Guid.NewGuid().ToString();
 
-        public DatabaseFixture Fixture => _fixture;
-
-        // protected RepositoryHelper RepositoryHelper { get; private set; }
     }
 }

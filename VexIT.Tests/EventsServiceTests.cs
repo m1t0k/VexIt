@@ -9,9 +9,9 @@ using VexIT.DataContracts.V1.Business;
 namespace VexIT.Tests
 {
     [TestClass]
-    public class EmployeeServiceTests : TestBase
+    public class EventsServiceTests : TestBase
     {
-        public EmployeeServiceTests() : base()
+        public EventsServiceTests() : base()
         {
         }
 
