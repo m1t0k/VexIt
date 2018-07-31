@@ -5,6 +5,14 @@ VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VexIT.Api", "VexIT.Api\VexIT.Api.csproj", "{8692B2C2-6556-44C6-BE2E-5B12E9932E83}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VexIT.DataContracts", "VexIT.DataContracts\VexIT.DataContracts.csproj", "{38DF61C5-076A-49E7-AD31-7E0003C40995}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VexIT.DataAccess", "VexIT.DataAccess\VexIT.DataAccess.csproj", "{122BB02A-C851-4E4E-8AEB-8B9110B8C67C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VexIT.Core", "VexIT.Core\VexIT.Core.csproj", "{69E00A06-7AA7-4285-9679-2FDE2BA7F988}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VexIT.Tests", "VexIT.Tests\VexIT.Tests.csproj", "{B04FB6E9-5868-4C3D-8209-9860443CFB06}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +23,22 @@ Global
 		{8692B2C2-6556-44C6-BE2E-5B12E9932E83}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8692B2C2-6556-44C6-BE2E-5B12E9932E83}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8692B2C2-6556-44C6-BE2E-5B12E9932E83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38DF61C5-076A-49E7-AD31-7E0003C40995}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38DF61C5-076A-49E7-AD31-7E0003C40995}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38DF61C5-076A-49E7-AD31-7E0003C40995}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38DF61C5-076A-49E7-AD31-7E0003C40995}.Release|Any CPU.Build.0 = Release|Any CPU
+		{122BB02A-C851-4E4E-8AEB-8B9110B8C67C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{122BB02A-C851-4E4E-8AEB-8B9110B8C67C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{122BB02A-C851-4E4E-8AEB-8B9110B8C67C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{122BB02A-C851-4E4E-8AEB-8B9110B8C67C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69E00A06-7AA7-4285-9679-2FDE2BA7F988}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69E00A06-7AA7-4285-9679-2FDE2BA7F988}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69E00A06-7AA7-4285-9679-2FDE2BA7F988}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69E00A06-7AA7-4285-9679-2FDE2BA7F988}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B04FB6E9-5868-4C3D-8209-9860443CFB06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B04FB6E9-5868-4C3D-8209-9860443CFB06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B04FB6E9-5868-4C3D-8209-9860443CFB06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B04FB6E9-5868-4C3D-8209-9860443CFB06}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,24 +1,60 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+using Serilog;
+using VexIT.Api.StartUp;
 
 namespace VexIT.Api
 {
     public class Program
-    {
-        public static void Main(string[] args)
+    {   /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        public static IWebHost BuildWebHost(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            return WebHost.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((builderContext, config) =>
+                {
+                    var env = builderContext.HostingEnvironment;
+
+                    config.AddJsonFile("appsettings.json", false, true)
+                        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true, true)
+                        .AddJsonFile($"appsettings.{env.EnvironmentName}.{Environment.MachineName}.json",
+                            true, true);
+
+                    Log.Logger = new LoggerConfiguration()
+                        .ReadFrom.Configuration(config.Build())
+                        .CreateLogger();
+
+                    Log.Logger.Information("App is starting.");
+                })
+                .UseStartup<Startup>()
+                .UseSerilog() 
+                .Build()
+                .Migrate();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="args"></param>
+        public static void Main(string[] args)
+        {
+            try
+            {
+                BuildWebHost(args).Run();
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "Host terminated unexpectedly");
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
+        }
     }
 }
