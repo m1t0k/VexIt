@@ -1,5 +1,4 @@
-import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
-import {of as observableOf} from 'rxjs';
+import {async, ComponentFixture, fakeAsync, TestBed} from '@angular/core/testing';
 import {EventListComponent} from './event-list.component';
 import {NoDataFoundComponent} from '../../components/no-data-found/no-data-found.component';
 import {PaginationComponent} from '../../components/pagination/pagination.component';
@@ -12,10 +11,7 @@ import {RouterStub} from '../../../core/tests/router-stub';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ActivatedRouterStub} from '../../../core/tests/activated-router-stub';
 import {SortedColumnComponent} from '../../components/sorted-column/sorted-column.component';
-import {PagedResult} from '../../../core/system/paged-result';
-import {EventDto} from '../../../core/model/event-dto';
 import {EventsServiceStub} from '../../../core/tests/events-service-stub';
-import {By} from '@angular/platform-browser';
 
 describe('EventListComponent', () => {
   let component: EventListComponent;
@@ -25,8 +21,7 @@ describe('EventListComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, FormsModule],
-      providers: [HttpClient, HttpHandler, AppConfigService, ComponentCoreService,
-        {provide: EventsService, useClass: EventsServiceStub},
+      providers: [HttpClient, HttpHandler, AppConfigService, ComponentCoreService, EventsServiceStub,
         {provide: Router, useClass: RouterStub},
         {provide: ActivatedRoute, useValue: ActivatedRouterStub.Value}
       ],
@@ -39,7 +34,7 @@ describe('EventListComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(EventListComponent);
     component = fixture.componentInstance;
-    service = TestBed.get(EventsService);
+    service = fixture.debugElement.injector.get(EventsService);
     fixture.detectChanges();
   });
 
@@ -47,7 +42,7 @@ describe('EventListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it(`Check that initially No Data Found is visible, but table and paginator hidden`, fakeAsync(() => {
+  it(`Check that initially No Data Found is visible, but table and paginator hidden.`, fakeAsync(() => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('#noDataFound')).not.toBeNull();
     expect(compiled.querySelector('#pagination')).toBeNull();
@@ -55,20 +50,10 @@ describe('EventListComponent', () => {
 
   }));
 
-  xit(`should load 2 events`, fakeAsync(() => {
-    const compiled = fixture.debugElement.nativeElement;
-    console.log(compiled.querySelector('#noDataFound'));
-    //expect(compiled.querySelector('#noDataFound')).toBeNull().;
-    expect(compiled.querySelector('#pagination')).toBeNull();
-
-    spyOn(service, 'getItems').and.returnValues();
-
+  it(`Should load 2 events`, fakeAsync(() => {
+    spyOn(service, 'getItems').and.returnValues(EventsServiceStub.getItems());
     component.ngOnInit();
-    tick();
     fixture.detectChanges();
-    //expect(component.data.TotalCount).toEqual(2);
-
+    expect(component.data.TotalCount).toEqual(2);
   }));
-
-
 });
