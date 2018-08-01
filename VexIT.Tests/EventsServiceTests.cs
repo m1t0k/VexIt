@@ -28,7 +28,8 @@ namespace VexIT.Tests
             {
                 Name = "event 1",
                 Place = "LN",
-                ScheduledAt = DateTime.Today
+                ScheduledAt = DateTime.Today,
+                CategoryId = EventCategory.Concert
             };
             var result = await eventController.CreateEvents(item);
 
@@ -38,6 +39,7 @@ namespace VexIT.Tests
             Assert.AreEqual(result.Name, item.Name);
             Assert.AreEqual(result.Place, item.Place);
             Assert.AreEqual(result.ScheduledAt, item.ScheduledAt);
+            Assert.AreEqual(result.CategoryId, EventCategory.Concert);
         }
     }
 }

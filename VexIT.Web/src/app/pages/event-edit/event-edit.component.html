@@ -1,3 +1,128 @@
-<p>
-  event-edit works!
-</p>
+<div class="container-fluid float-left">
+
+  <div class="page-header">
+    <div class="form-group row mt-4 mb-4">
+      <div class="col-md-2 col-lg-2 col-xl-2">
+        <button class="btn" (click)="goToEventList()"><i class="fal fa-chevron-left"></i></button>
+
+      </div>
+
+      <div class="col-md-5 col-lg-5 col-xl-5">
+        <h3 *ngIf="id.length<=0">New Event</h3>
+        <h3 *ngIf="id.length>0">Edit Event</h3>
+      </div>
+      <hr/>
+    </div>
+
+  </div>
+
+  <hr/>
+
+  <form class="form-horizontal" #editForm="ngForm" (ngSubmit)="saveData()" *ngIf="eventItem!=null">
+    <!---->
+
+
+    <div class="form-group row mt-4">
+      <label for="Name" class="control-label col-md-2 col-lg-2 col-xl-2">Name</label>
+      <div class="col-md-5 col-lg-5 col-xl-5">
+        <input type="text" id="Name" class="form-control" [(ngModel)]="eventItem.Name" name="Name"/>
+
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="Category" class="control-label col-md-2 col-lg-2 col-xl-2">Category</label>
+      <div class="col-md-5 col-lg-5 col-xl-5">
+        <select id="Category" name="Category" class="form-control" [(ngModel)]="eventItem.CategoryId">
+          <option *ngFor="let item of getEventCategoryList() | async" [value]="item">
+            {{getEventCategoryName(item)}}
+          </option>
+        </select>
+
+      </div>
+    </div>
+
+    <div class="form-group row mb-0">
+      <label for="day" class="control-label col-md-2 col-lg-2 col-xl-2">Time</label>
+      <div class="col-md-5 col-lg-5 col-xl-5">
+        <div class="form-group row ml-0 pl-0">
+          <input type="number" id="day" min="1" max="31" class="form-control col-md-3 col-lg-3 col-xl-3"
+                 [(ngModel)]="day"
+                 name="day" [placeholder]="'day'"/>&nbsp;/&nbsp;
+
+          <input type="number" id="month" min="1" max="12" class="form-control col-md-3 col-lg-3 col-xl-3"
+                 [(ngModel)]="month"
+                 name="month" [placeholder]="'month'"/> &nbsp;/&nbsp;
+
+          <input type="number" min="1754" id="year" class="form-control col-md-3 col-lg-3 col-xl-3" [(ngModel)]="year"
+                 name="year" [placeholder]="'year'"/>
+        </div>
+
+        <div class="form-group row  ml-0 pl-0">
+          <input type="number" id="hours" class="form-control col-md-3 col-lg-3 col-xl-3" [(ngModel)]="hours"
+                 name="hours" [placeholder]="'hours'"/>
+          &nbsp;:&nbsp;
+          <input type="text" id="minutes" class="form-control col-md-3 col-lg-3 col-xl-3" [(ngModel)]="minutes"
+                 name="minutes" [placeholder]="'minutes'"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="Country" class="control-label col-md-2 col-lg-2 col-xl-2">Place</label>
+      <div class="col-md-5 col-lg-5 col-xl-5">
+
+        <input type="text" id="Country" class="form-control mb-2" [(ngModel)]="eventItem.Country"
+               name="Country" [placeholder]="'Country'"/>
+
+        <input type="text" id="City" class="form-control mb-2" [(ngModel)]="eventItem.City"
+               name="City" [placeholder]="'City'"/>
+
+        <input type="text" id="Street" class="form-control mb-2" [(ngModel)]="eventItem.Street"
+               name="Street" [placeholder]="'Street'"/>
+
+        <input type="text" id="Place" class="form-control" [(ngModel)]="eventItem.Place"
+               name="Place" [placeholder]="'Place'"/>
+
+      </div>
+    </div>
+
+
+    <div class="form-group row">
+      <label for="Description" class="control-label col-md-2 col-lg-2 col-xl-2">Description</label>
+      <div class="col-md-5 col-lg-5 col-xl-5">
+        <textarea id="Description" class="form-control" name="Description"
+                  style="width: 100%!important;overflow:hidden!important;text-align: left!important;"
+                  (change)="setDescription($event)" rows="7" [(ngModel)]="eventItem.Description"></textarea>
+
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="YouTubeUrl" class="control-label col-md-2 col-lg-2 col-xl-2">YouTube Url</label>
+      <div class="col-md-5 col-lg-5 col-xl-5">
+        <input type="url" id="YouTubeUrl" class="form-control" [(ngModel)]="eventItem.YouTubeUrl" name="YouTubeUrl"/>
+
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="Photo" class="control-label col-md-2 col-lg-2 col-xl-2">Photo</label>
+      <div class="col-md-5 col-lg-5 col-xl-5">
+        <input type="file" id="Photo" class="form-control" name="Photo"/>
+
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-md-7 col-lg-7 col-xl-7">
+        <div class="btn-group float-right" role="group">
+          <button type="submit" class="btn btn-outline-primary">Save
+          </button>
+
+        </div>
+      </div>
+    </div>
+
+  </form>
+</div>

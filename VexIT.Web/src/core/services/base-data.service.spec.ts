@@ -4,9 +4,8 @@ import {BaseDto} from '../model/base-dto';
 import {HttpClient, HttpHandler} from '@angular/common/http';
 import {AppConfigService} from './app-config.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {RouterStub} from '../tests/router-stub';
 import {ActivatedRouterStub} from '../tests/activated-router-stub';
-
+import {RouterStub} from '../tests/router-stub';
 
 
 describe('BaseDataService', () => {

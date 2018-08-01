@@ -1,18 +1,16 @@
 import {catchError, finalize} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
-import {PagedResult} from '../model/system/paged-result';
-import {Response} from '../model/system/response';
-import {IDataService} from './idata-service';
+import {Response} from '../system/response';
 import {BaseService} from './base-service.service';
-import {ValueItem} from '../model/value-item';
 import {AppConfigService} from './app-config.service';
 import {BaseDto} from '../model/base-dto';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {PagedResult} from '../system/paged-result';
 
 
 @Injectable()
-export class BaseDataService<T extends BaseDto> extends BaseService implements IDataService<T> {
+export class BaseDataService<T extends BaseDto> extends BaseService {
 
   constructor(http: HttpClient, configService: AppConfigService) {
     super(http, configService);
@@ -22,13 +20,6 @@ export class BaseDataService<T extends BaseDto> extends BaseService implements I
     return {} as T;
   }
 
-  public getDataList(listName: string): Observable<ValueItem[]> {
-    this.onOperationStart();
-    return this.http
-      .get<ValueItem[]>(this.getFullApiUrl() + '/dataLists/' + listName).pipe(
-        catchError(this.handleErrorObservable),
-        finalize(this.onOperationEnd));
-  }
 
   public getItems(pageIndex?: number, pageSize?: number, orderBy?: string): Observable<PagedResult<T>> {
     this.onOperationStart();

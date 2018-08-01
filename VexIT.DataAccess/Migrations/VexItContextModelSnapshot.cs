@@ -24,17 +24,59 @@ namespace VexIT.DataAccess.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Name")
+                    b.Property<short>("CategoryId");
+
+                    b.Property<string>("City")
                         .HasMaxLength(512);
 
+                    b.Property<string>("Country")
+                        .HasMaxLength(512);
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(2048);
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256);
+
                     b.Property<string>("Place")
-                        .HasMaxLength(1024);
+                        .HasMaxLength(512);
 
                     b.Property<DateTime>("ScheduledAt");
+
+                    b.Property<string>("Street")
+                        .HasMaxLength(512);
+
+                    b.Property<string>("YouTubeUrl")
+                        .HasMaxLength(512);
 
                     b.HasKey("Id");
 
                     b.ToTable("Events");
+                });
+
+            modelBuilder.Entity("VexIT.DataAccess.Model.Photo", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Content");
+
+                    b.Property<Guid>("EventId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventId")
+                        .IsUnique();
+
+                    b.ToTable("Photos");
+                });
+
+            modelBuilder.Entity("VexIT.DataAccess.Model.Photo", b =>
+                {
+                    b.HasOne("VexIT.DataAccess.Model.Event", "Event")
+                        .WithOne("Photo")
+                        .HasForeignKey("VexIT.DataAccess.Model.Photo", "EventId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

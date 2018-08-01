@@ -1,0 +1,12 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="navbar-nav">
+    <a class="nav-item nav-link {{tabs.home?'active':''}}" [routerLink]="['/']" (click)="setHomeActive()">Home <span
+      class="sr-only">(current)</span></a>
+    <a class="nav-item nav-link {{tabs.events?'active':''}}" [routerLink]="['events']"
+       (click)="setEventsActive()">Events</a>
+    <a class="nav-item nav-link {{tabs.about?'active':''}}" [routerLink]="['about']"
+       (click)="setAboutActive()">About</a>
+    <a class="nav-item nav-link {{tabs.contacts?'active':''}}" [routerLink]="['contact']"
+       (click)="setContactActive()">Contact</a>
+  </div>
+</nav>

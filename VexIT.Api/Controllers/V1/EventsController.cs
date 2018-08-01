@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using VexIT.Core.Interfaces;
 using VexIT.DataContracts.V1.Business;
@@ -11,6 +12,7 @@ namespace VexIT.Api.Controllers.V1
     [ApiVersion("1.0")]
     [Route("api/{version:apiVersion}/events")]
     [ApiController]
+    [EnableCors("DefaultPolicy")]
     public class EventsController : Controller
     {
         private readonly IEventsService _service;
@@ -58,7 +60,7 @@ namespace VexIT.Api.Controllers.V1
             await _service.DeleteItemAsync(id);
             return new ResponseDto {Success = true, Id = id};
         }
-
+            
         /// <summary>
         ///     Method returns Event entity indentified by dd.
         /// </summary>

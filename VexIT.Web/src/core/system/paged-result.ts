@@ -5,5 +5,7 @@ export class PagedResult<T> {
 
   constructor() {
     this.Items = [];
+    this.TotalPages = 0;
+    this.TotalCount = 0;
   }
 }

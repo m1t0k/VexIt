@@ -1,9 +1,7 @@
-
-import {throwError as observableThrowError, Observable} from 'rxjs';
+import {throwError as observableThrowError} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {AppConfigService} from './app-config.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {ComponentCoreService} from './component-core.service';
 
 @Injectable()
 export class BaseService {
@@ -17,20 +15,14 @@ export class BaseService {
   }
 
   public onOperationStart(): void {
-    ComponentCoreService.OperationInProgress.next(true);
   }
 
   public onOperationEnd(): void {
-    ComponentCoreService.OperationInProgress.next(false);
   }
 
 
   protected getFullApiUrl(): string {
     return this.baseApiUrl + this.apiUrl;
-  }
-
-  protected mapResults<T>(response: any): T {
-    return response as T;
   }
 
   protected handleErrorObservable(error: any) {
