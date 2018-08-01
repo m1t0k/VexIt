@@ -20,16 +20,13 @@ export class EventListComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('getting data');
     this.getData();
   }
 
   private getData() {
-    this.service.getItems(1, this.pageSize).subscribe(
+    this.service.getItems(1, this.pageSize, this.orderBy).subscribe(
       data => {
-        console.log('completed');
         this.data = data;
-        this.pageSize=1;
       },
       err => {
         // only for demo

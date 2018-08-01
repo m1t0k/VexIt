@@ -19,6 +19,8 @@ namespace VexIT.Tests
         [TestMethod]
         public async Task CrudTests()
         {
+            /// test for new event creation
+            
             var eventService = ServiceProvider.GetService<IEventsService>();
             Assert.IsNotNull(eventService);
 

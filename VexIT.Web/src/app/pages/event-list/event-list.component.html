@@ -1,4 +1,4 @@
-<div class="container-fluid col-md-9 col-lg-9 col-xl-9 float-left" >
+<div class="container-fluid col-md-9 col-lg-9 col-xl-9 float-left">
   <div class="float-right mb-3 mt-3">
     <button class="btn btn-sm btn-outline-success mr-2" type="button" (click)="createItem()">
       <i class="fal fa-plus"></i> Create Event
@@ -20,7 +20,10 @@
                              [SortByName]="'Place'"></app-sorted-column>
         </th>
 
-        <th>Scheduled At</th>
+        <th>
+          <app-sorted-column (onSort)="onSort($event)" [ColumnName]="'Scheduled At'"
+                             [SortByName]="'ScheduledAt'"></app-sorted-column>
+        </th>
         <th></th>
       </tr>
       </thead>
